@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,12 +31,12 @@ public class PlayerController : MonoBehaviour
     {
      
 
-        if (movementVector.x > 0 && rb.velocity.x < maxSpeed)
+        if (movementVector.x > 0 && rb.velocity.x < maxSpeed) // Moves player left and right
             rb.AddForce(Vector2.right * speed);
         else if (movementVector.x < 0 && Mathf.Abs(rb.velocity.x) < maxSpeed)
             rb.AddForce(Vector2.left * speed);
 
-        if (movementVector.x < 0 && facingRight)
+        if (movementVector.x < 0 && facingRight) // Flips the player sprite to face left or right
         {
             Flip();
             facingRight = false;
@@ -46,33 +47,33 @@ public class PlayerController : MonoBehaviour
             facingRight = true;
         }
 
-        if (jump)
+        if (jump) // Checks to see if the player has jumped
         {
             rb.AddForce(Vector2.up * height);
             jump = false;
             isGrounded = false;
         }
 
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < 0) // Makes player less floaty
             rb.gravityScale = gravMult;
         else
             rb.gravityScale = 1;
 
     }
 
-    public void OnMove(InputValue movementValue)
+    public void OnMove(InputValue movementValue) // Uses the keyboard input A or D to have player move left or right
     {
         movementVector = movementValue.Get<Vector2>();
         Debug.Log(movementVector.x);
     }
 
-    public void OnJump(InputValue movementValue)
+    public void OnJump(InputValue movementValue) // Uses the keyboard input spacebar to have the player jump
     {
         if (isGrounded)
             jump = true;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision) // Checks to see if the player is in contact with parts of the map labeled as "Ground"
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -81,7 +82,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public Vector2 GetDirection()
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Boundry"))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    public Vector2 GetDirection() // Checks if the player is facing left or right
     {
         if (facingRight)
             return Vector2.right;
@@ -89,7 +98,7 @@ public class PlayerController : MonoBehaviour
             return Vector2.left;
     }
 
-    void Flip()
+    void Flip() // Flips the player sprite to face left or right
     {
         Vector3 theScale = transform.localScale;
         theScale.x = theScale.x * -1;
