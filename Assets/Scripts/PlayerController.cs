@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 7f;
     public float gravMult = 3f;
     public Transform atkPoint;
-    public float atkRange = .5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +32,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Attack();
+            RaycastHit2D hit = Physics2D.Raycast(atkPoint.position, Vector2.right, 1f);
+            Debug.DrawRay(atkPoint.position, new Vector2(1, 1), Color.red, 0.5f);
+            Debug.Log(hit);
+            animator.SetBool("IsAttacking", true);
+            if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(hit.collider.gameObject);
+            }
         }
     }
 
@@ -88,12 +94,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Attack()
-    {
-        animator.SetBool("IsAttacking", true);
-        Physics2D.OverlapCircleAll(atkPoint.position, atkRange);
-    }
-
     public void OnCollisionEnter2D(Collision2D collision) // Checks to see if the player is in contact with parts of the map labeled as "Ground"
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -108,11 +108,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Boundry"))
         {
+            GameManager.instance.DecreaseLives();
             SceneManager.LoadScene(0);
-        }
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Hit");
         }
     }
 

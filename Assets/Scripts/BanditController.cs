@@ -6,7 +6,6 @@ using UnityEngine;
 public class BanditController : MonoBehaviour
 {
     private int direction = 1;
-    private int health = 100;
     private SpriteRenderer rend;
     private Animator animator;
 
