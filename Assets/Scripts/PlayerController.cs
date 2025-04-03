@@ -19,17 +19,28 @@ public class PlayerController : MonoBehaviour
     public float height = 500;
     public float maxSpeed = 7f;
     public float gravMult = 3f;
+    public Transform atkPoint;
+    public float atkRange = .5f;
     // Start is called before the first frame update
     void Start()
     {
         sprite_r = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Attack();
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-     
+        animator.SetFloat("Speed", Mathf.Abs(movementVector.x));
 
         if (movementVector.x > 0 && rb.velocity.x < maxSpeed) // Moves player left and right
             rb.AddForce(Vector2.right * speed);
@@ -70,15 +81,26 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputValue movementValue) // Uses the keyboard input spacebar to have the player jump
     {
         if (isGrounded)
+        {
+            animator.SetBool("IsJumping", true);
             jump = true;
+        }
+
+    }
+
+    void Attack()
+    {
+        animator.SetBool("IsAttacking", true);
+        Physics2D.OverlapCircleAll(atkPoint.position, atkRange);
     }
 
     public void OnCollisionEnter2D(Collision2D collision) // Checks to see if the player is in contact with parts of the map labeled as "Ground"
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            animator.SetBool("IsJumping", false);
             isGrounded = true;
-            Debug.Log("Touching GHround");
+            Debug.Log("Touching Ground");
         }
     }
 
@@ -87,6 +109,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Boundry"))
         {
             SceneManager.LoadScene(0);
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Hit");
         }
     }
 
