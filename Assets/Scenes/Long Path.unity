@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 328115853}
   - component: {fileID: 328115852}
+  - component: {fileID: 328115855}
   - component: {fileID: 328115851}
   - component: {fileID: 328115850}
   - component: {fileID: 328115854}
@@ -284,6 +285,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188fc09a9476dba4abca05f14b1afc50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &328115855
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328115849}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9fc3f7b80e39cfc41987701220d5b24c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &511307182
 GameObject:
   m_ObjectHideFlags: 0
@@ -10390,6 +10412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4065233479237688580}
   - component: {fileID: 4462153058575050982}
+  - component: {fileID: 6589935714518603186}
   - component: {fileID: 4855194736669692680}
   - component: {fileID: 6589935714518603184}
   - component: {fileID: 6589935714518603185}
@@ -10703,6 +10726,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188fc09a9476dba4abca05f14b1afc50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &6589935714518603186
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433483566290412143}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9fc3f7b80e39cfc41987701220d5b24c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
