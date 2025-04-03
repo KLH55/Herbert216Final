@@ -32,13 +32,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            RaycastHit2D hit = Physics2D.Raycast(atkPoint.position, Vector2.right, 1f);
-            Debug.DrawRay(atkPoint.position, new Vector2(1, 1), Color.red, 0.5f);
+            RaycastHit2D hit = Physics2D.Raycast(atkPoint.position, Vector2.right, 1.35f);
+            Debug.DrawRay(atkPoint.position, new Vector2(1.35f, 0), Color.red, 0.5f);
             Debug.Log(hit);
             animator.SetBool("IsAttacking", true);
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
             {
                 Destroy(hit.collider.gameObject);
+                animator.SetBool("IsAttacking", false);
             }
         }
     }

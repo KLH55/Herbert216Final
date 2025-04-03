@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BanditController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BanditController : MonoBehaviour
     private SpriteRenderer rend;
     private Animator animator;
 
+    public Transform atkPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,18 @@ public class BanditController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    
+    void Update()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(atkPoint.position, Vector2.left, 1.35f);
+        Debug.DrawRay(atkPoint.position, new Vector2(-1.35f, 0), Color.red, .5f);
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
+        {
+            animator.SetBool("IsAttacking", true);
+            GameManager.instance.DecreaseLives();
+            SceneManager.LoadScene(0);
+        }
+    }
+
     void FixedUpdate()
     {
         animator.SetFloat("Speed", Mathf.Abs(direction));
