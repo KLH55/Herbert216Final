@@ -6,8 +6,7 @@ public class ApprenticeController : MonoBehaviour
 {
     private SpriteRenderer rend;
     private Animator animator;
-    
-    public int direction = 1;
+    private int direction = 1;
 
     // Start is called before the first frame update
     void Start()
