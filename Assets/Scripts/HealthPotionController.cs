@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class HealthPotionController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            GameManager.instance.IncreaseLives();
+            Debug.Log(GameManager.instance.GetLives());
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -32,10 +33,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            animator.SetBool("IsAttacking", true);
             RaycastHit2D hit = Physics2D.Raycast(atkPoint.position, Vector2.right, 1.35f);
             Debug.DrawRay(atkPoint.position, new Vector2(1.35f, 0), Color.red, 0.5f);
             Debug.Log(hit);
-            animator.SetBool("IsAttacking", true);
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
             {
                 Destroy(hit.collider.gameObject);
@@ -102,6 +103,11 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsJumping", false);
             isGrounded = true;
             Debug.Log("Touching Ground");
+        }
+        if (collision.gameObject.CompareTag("Orb"))
+        {
+            GameManager.instance.DecreaseLives();
+            SceneManager.LoadScene(0);
         }
     }
 
