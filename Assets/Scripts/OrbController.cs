@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrbController : MonoBehaviour
 {
-    public float force = 16f;
+    public float force = 6f;
 
     private Vector2 direction;
 

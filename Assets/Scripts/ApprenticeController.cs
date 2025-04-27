@@ -10,8 +10,8 @@ public class ApprenticeController : MonoBehaviour
     private SpriteRenderer rend;
     private Animator animator;
     private int direction = 1;
-    private float fireRate = .8f;
-    private float nextFire = .5f;
+    private float fireRate = 1f;
+    private float nextFire = 1.5f;
     private bool facingRight = true;
 
     // Start is called before the first frame update
