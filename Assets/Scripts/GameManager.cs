@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private int lives = 3;
 
-    // Start is called before the first frame update
+    // Awake used to make sure the game is loaded properly.
     void Awake()
     {
         if (instance == null)
@@ -18,22 +19,27 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    // Function used to check if the players lives are less than or equal to zero then quits the game if they are.
+    public void NoLives()
     {
-        
+        if (lives <= 0)
+            EditorApplication.isPlaying = false;
     }
 
+    // Subtracts one from the number of lives the player has.
     public void DecreaseLives()
     {
         lives--;
+        NoLives();
     }
 
+    // Adds one to the number of lives the player has.
     public void IncreaseLives()
     {
         lives++;
     }
 
+    // Used to see how many lives the player has.
     public int GetLives()
     {
         return lives;

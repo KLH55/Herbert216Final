@@ -15,20 +15,24 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false;
     private bool jump = false;
     private bool facingRight = true;
+    private AudioSource audioSource;
 
     public float speed = 3;
     public float height = 500;
     public float maxSpeed = 7f;
     public float gravMult = 3f;
     public Transform atkPoint;
+    
     // Start is called before the first frame update
     void Start()
     {
         sprite_r = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
+    // Update used to check if the player pressed the Q key to attack.
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -45,7 +49,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // FixedUpdate used for movement and jumping.
     void FixedUpdate()
     {
         animator.SetFloat("Speed", Mathf.Abs(movementVector.x));
@@ -80,12 +84,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // Function used to check if the A or D key is pressed.
     public void OnMove(InputValue movementValue) // Uses the keyboard input A or D to have player move left or right
     {
         movementVector = movementValue.Get<Vector2>();
         Debug.Log(movementVector.x);
     }
 
+    // Function to check if spacebar key is pressed.
     public void OnJump(InputValue movementValue) // Uses the keyboard input spacebar to have the player jump
     {
         if (isGrounded)
@@ -96,21 +102,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void OnCollisionEnter2D(Collision2D collision) // Checks to see if the player is in contact with parts of the map labeled as "Ground"
+    // Checks for collision.
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground")) // Checks to see if the player is in contact with the ground.
         {
             animator.SetBool("IsJumping", false);
             isGrounded = true;
             Debug.Log("Touching Ground");
         }
-        if (collision.gameObject.CompareTag("Orb"))
+        if (collision.gameObject.CompareTag("Orb")) // Checks to see if the player has been hit by the Orb attack.
         {
             GameManager.instance.DecreaseLives();
             SceneManager.LoadScene(0);
         }
     }
 
+    // Used to check if the player has fallen out of bounds on the map.
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Boundry"))
@@ -120,7 +128,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public Vector2 GetDirection() // Checks if the player is facing left or right
+    // Checks if the player is facing left or right
+    public Vector2 GetDirection()
     {
         if (facingRight)
             return Vector2.right;
@@ -128,7 +137,8 @@ public class PlayerController : MonoBehaviour
             return Vector2.left;
     }
 
-    void Flip() // Flips the player sprite to face left or right
+    // Flips the player sprite to face left or right
+    void Flip()
     {
         Vector3 theScale = transform.localScale;
         theScale.x = theScale.x * -1;

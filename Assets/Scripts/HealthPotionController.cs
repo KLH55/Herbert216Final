@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthPotionController : MonoBehaviour
 {
+    // Increases the player's lives when they touch a health potion.
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

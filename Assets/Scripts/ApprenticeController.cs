@@ -13,15 +13,18 @@ public class ApprenticeController : MonoBehaviour
     private float fireRate = 1f;
     private float nextFire = 1.5f;
     private bool facingRight = true;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    
+    // Fixed update is used to check if the apprentice can see the player to shoot at them,
+    // it is also used fot the apprentice to walk on platfroms.
     void FixedUpdate()
     {
         animator.SetFloat("Speed", Mathf.Abs(direction));
@@ -42,11 +45,13 @@ public class ApprenticeController : MonoBehaviour
         if (playerHit.collider != null && playerHit.collider.CompareTag("Player"))
         {
             OnOrb();
+            audioSource.Play();
         }
 
         transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x - 1 * direction, transform.position.y), Time.deltaTime);
     }
 
+    // Function to create the orb that is shot at the player.
     public void OnOrb()
     {
         if (Time.time >= nextFire)
@@ -57,6 +62,7 @@ public class ApprenticeController : MonoBehaviour
         }
     }
 
+    // Checks to see if the apprentice is facing left or right.
     public Vector2 GetDirection()
     {
         if (facingRight)

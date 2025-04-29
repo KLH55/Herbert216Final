@@ -11,6 +11,7 @@ public class BanditController : MonoBehaviour
     private Animator animator;
 
     public Transform atkPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class BanditController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    // Update is used to check if the player is within range of the Bandit to be attacked.
     void Update()
     {
         RaycastHit2D hit = Physics2D.Raycast(atkPoint.position, Vector2.left, 1.35f);
@@ -30,6 +32,7 @@ public class BanditController : MonoBehaviour
         }
     }
 
+    // FixedUpdate is used for the Bandit's movement on platforms.
     void FixedUpdate()
     {
         animator.SetFloat("Speed", Mathf.Abs(direction));
