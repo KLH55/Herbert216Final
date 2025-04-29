@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Orb")) // Checks to see if the player has been hit by the Orb attack.
         {
             GameManager.instance.DecreaseLives();
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("Long Path");
         }
     }
 
@@ -124,7 +124,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Boundry"))
         {
             GameManager.instance.DecreaseLives();
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("Long Path");
+        }
+        if (collision.gameObject.CompareTag("Ending"))
+        {
+            SceneManager.LoadScene("End Screen");
         }
     }
 

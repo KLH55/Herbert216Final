@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Boundry
   - Orb
+  - Ending
   layers:
   - Default
   - TransparentFX
