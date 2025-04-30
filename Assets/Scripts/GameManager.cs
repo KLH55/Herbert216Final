@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public void NoLives()
     {
         if (lives <= 0)
-            EditorApplication.isPlaying = false;
+            Application.Quit();
     }
 
     // Subtracts one from the number of lives the player has.
