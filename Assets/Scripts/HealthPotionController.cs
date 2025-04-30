@@ -1,3 +1,5 @@
+// Kris Herbert 4/29/2025; This code is for the health potion pickup that adds lives for the player.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

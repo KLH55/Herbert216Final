@@ -1,3 +1,5 @@
+// Kris Herbert 4/29/2025; This code is for the Bandit enemy and makes this enemy walk and do a melee attack against the player.
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;

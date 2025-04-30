@@ -1,3 +1,6 @@
+// Kris Herbert 4/29/2025; This code is what makes the player character work. It allows movement, attacking, jumping,
+// and all the things that can kill or heal the player.
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -125,10 +128,6 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.instance.DecreaseLives();
             SceneManager.LoadScene("Long Path");
-        }
-        if (collision.gameObject.CompareTag("Ending"))
-        {
-            SceneManager.LoadScene("End Screen");
         }
     }
 

@@ -1,3 +1,5 @@
+// Kris Herbert 4/29/2025; This game manager is used to keep track of the players lives.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;

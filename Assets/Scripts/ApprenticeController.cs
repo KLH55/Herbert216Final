@@ -1,3 +1,5 @@
+// Kris Herbert 4/29/2025; This code is used for the Wizard Apprentice enemy and makes this enemy move and shoot a magic orb when the player is nearby.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
